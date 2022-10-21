@@ -7,16 +7,19 @@ class Game:
     def __init__(self):
         
         self.width= 400
-        self.heigth= 400
+        self.height= 400
         
-        self.mySky= Sky(self.width, self.heigth, 50)
+        self.mySky= Sky(self.width, self.height, 50)
         
-        self.screen= pygame.display.set_mode((self.width, self.heigth))
+        self.screen= pygame.display.set_mode((self.width, self.height))
         self.clock= pygame.time.Clock()
         self.fps= 60
         #Cargar la hoja de imágenes
         
         self.sprites= pygame.image.load("sprites.png")
+        
+        self.shipsprite= pygame.Surface((64,64)).convert()
+        self.shipsprite.blit(self.sprites,(0,0),(250,436,64,64))
         
     def run(self):
         
@@ -40,6 +43,10 @@ class Game:
                 pygame.draw.circle(self.screen,(r,g,b), star, 1)
                 
             self.mySky.move()
+            
+            x=self.width/2
+            y=self.height/2
+            self.screen.blit(self.shipsprite, (x,y))
                 
             pygame.display.flip()
             
